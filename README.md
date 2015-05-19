@@ -1,4 +1,4 @@
-pentaho
+docker-pentaho-ce-5.3
 ==============
 
 ## Base image for running Pentaho BISERVER CE software within a Docker Container
