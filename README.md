@@ -22,7 +22,7 @@ You are now able to ssh directly into the container with your ssh keys.
 ssh -p 2222 root@docker_host
 ```
 
-To start the server, run:
+To check the biserver logs, ssh to the container and run
 ```
-/home/pentaho/biserver-ce-5.3.0.0-213/biserver-ce/start-pentaho.sh
+tail -f /home/pentaho/biserver-ce-5.3.0.0-213/biserver-ce/tomcat/logs/catalina.out
 ```

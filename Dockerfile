@@ -17,6 +17,10 @@ RUN apt-get install -y oracle-java7-installer
 RUN apt-get update
 RUN apt-get install -y maven
 
+# Install supervisor
+RUN apt-get update && apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+
 # Install useful command line utilities
 RUN apt-get -y install man vim sudo
 
@@ -48,6 +52,7 @@ RUN sh /root/psqlfix.sh && rm /root/psqlfix.sh
 WORKDIR /home/pentaho/
 RUN wget http://downloads.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.3/biserver-ce-5.3.0.0-213.zip
 RUN unzip biserver-ce-5.3.0.0-213.zip -d biserver-ce-5.3.0.0-213
+RUN rm biserver-ce-5.3.0.0-213.zip
 
 # Add script to load tables
 ADD loaddb.sh /home/pentaho/
@@ -55,7 +60,14 @@ RUN chmod +x /home/pentaho/loaddb.sh
 RUN /etc/init.d/postgresql start && \
 	printf 'password\n' | /home/pentaho/loaddb.sh
 
+# Copy supervisor config
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Add script to start biserver
+ADD start.sh /home/pentaho/
+RUN chmod +x /home/pentaho/start.sh
+
 # Start Service
-CMD service postgresql start && /run.sh
 EXPOSE 22 5432 8080
+CMD /home/pentaho/start.sh && /usr/bin/supervisord
 
