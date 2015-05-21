@@ -48,13 +48,13 @@ RUN /etc/init.d/postgresql start && \
 ADD psqlfix.sh /root/
 RUN sh /root/psqlfix.sh && rm /root/psqlfix.sh
 
-# Download latest build in CI
+# Download and extract pentaho BA Server binary
 WORKDIR /home/pentaho/
 RUN wget http://downloads.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.3/biserver-ce-5.3.0.0-213.zip
 RUN unzip biserver-ce-5.3.0.0-213.zip -d biserver-ce-5.3.0.0-213
 RUN rm biserver-ce-5.3.0.0-213.zip
 
-# Add script to load tables
+# Add/run script to load default tables
 ADD loaddb.sh /home/pentaho/
 RUN chmod +x /home/pentaho/loaddb.sh
 RUN /etc/init.d/postgresql start && \
@@ -67,6 +67,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD start.sh /home/pentaho/
 RUN chmod +x /home/pentaho/start.sh
 
+# Redirect Tomcat output
 ENV CATALINA_OUT /dev/stdout
 
 # Start Service
