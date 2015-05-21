@@ -67,6 +67,8 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD start.sh /home/pentaho/
 RUN chmod +x /home/pentaho/start.sh
 
+ENV CATALINA_OUT /dev/stdout
+
 # Start Service
 EXPOSE 22 5432 8080
 CMD /home/pentaho/start.sh && /usr/bin/supervisord
