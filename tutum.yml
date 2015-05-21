@@ -1,0 +1,4 @@
+web:
+  image: tutum.co/bytekast/pentaho-ce
+  ports:
+   - "80:8080"

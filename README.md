@@ -26,3 +26,6 @@ To check the biserver logs, ssh to the container and run
 ```
 tail -f /home/pentaho/biserver-ce-5.3.0.0-213/biserver-ce/tomcat/logs/catalina.out
 ```
+
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/bytekast/docker-pentaho-ce-5.3)
+
