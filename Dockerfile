@@ -9,6 +9,9 @@ RUN apt-get install -y bash-completion
 RUN apt-get install -y libwebkitgtk-1.0-0 libxtst6
 RUN apt-get install -y zip unzip
 
+# Postgres AUFS bug hack
+RUN mkdir /etc/ssl/private-copy; mv /etc/ssl/private/* /etc/ssl/private-copy/; rm -r /etc/ssl/private; mv /etc/ssl/private-copy /etc/ssl/private; chmod -R 0700 /etc/ssl/private; chown -R postgres /etc/ssl/private
+
 # Download and extract pentaho BA Server binary
 WORKDIR /home/pentaho/
 RUN wget http://downloads.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.3/biserver-ce-5.3.0.0-213.zip
