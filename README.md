@@ -12,7 +12,7 @@ docker build -t bytekast/pentaho-ce-5.3 .
 
 ### Running
 
-`bytekast/pentaho-ce-5.3` is designed to run as a dameon, which you can ssh into and intall Pentaho.
+`bytekast/pentaho-ce-5.3` is designed to run as a daemon, which you can ssh into and intall Pentaho.
 
 To start a new container, run
 ```
