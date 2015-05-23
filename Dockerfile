@@ -3,8 +3,8 @@ FROM bytekast/docker-pentaho-base
 MAINTAINER Rowell Belen developer@bytekast.com
 
 # Install useful command line utilities
-RUN apt-get -y install man vim sudo
-RUN apt-get -y install net-tools dnsutils
+RUN apt-get install -y man vim sudo
+RUN apt-get install -y net-tools dnsutils
 RUN apt-get install -y bash-completion
 RUN apt-get install -y libwebkitgtk-1.0-0 libxtst6
 RUN apt-get install -y zip unzip
